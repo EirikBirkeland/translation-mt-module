@@ -17,10 +17,9 @@ const serverInstance = axios.create({
     },
 });
 
-export default class Fetcher {
-    constructor(id) {
-        this.segmentId = id;
-    }
+// TODO: decide on name: TranslationService, TranslationProvider, TranslationProxy
+// TranslationFetcher, TranslationRetriever
+export default class TranslationService {
     submit(payload, cb) {
         return new Promise((resolve, reject) => {
             // make POST request to server's /translate end-point
@@ -28,9 +27,8 @@ export default class Fetcher {
             serverInstance.post(ENDPOINTS.TRANSLATE, { data: payload }).then((res) => {
                 if (res) {
                     resolve(res);
-                } else {
-                    reject()
                 }
+                reject()
             }).catch(function (err) {
                 // implementation of handleError has been omitted from this example
                 console.warn(err);
