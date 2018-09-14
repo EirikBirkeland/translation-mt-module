@@ -25,7 +25,7 @@ describe('a translation fetcher', () => {
         fetcher.submit({ payload }).then(fn1);
     });
 
-    it('should retrieve the expected adapted translation from the server', async (done) => {
+    it('should train the back-end and retrieve an adapted translation', async (done) => {
         const fetcher = new Fetcher();
         
         // first, we want to train the server to equate "world" with "jord"
@@ -63,6 +63,6 @@ describe('a translation fetcher', () => {
             expect(res.status).toEqual(200);
             expect(res.data).toEqual('Jorden er flott!');
             done();
-        });
+        });g
     });
 });
