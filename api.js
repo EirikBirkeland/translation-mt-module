@@ -1,38 +1,4 @@
-const BASE_URL = process.env.NODE_ENV !== 'PRODUCTION'
-	? 'http://localhost:3000/'
-	: 'https://api.transperfect.com';
-const ENDPOINTS = {
-	TRANSLATE: "translate",
-};
 
-const serverInstance = axios.create({
-	baseURL: BASE_URL,
-	timeout: 8000,
-	headers: {},
-	auth: {
-		username: 'eirikbirkeland',
-		password: 'foobar'
-	},
-});
-
-class Fetcher {
-	constructor(id) {
-		this.segmentId = id;
-	}
-
-	submit(payload, cb) {
-		// make POST request to server's /translate end-point
-		// and retrieve an updated machine translation
-		serverInstance.post(ENDPOINTS.TRANSLATE, { data: payload }, (res) => {
-			if (res) {
-				return cb(res);
-			}
-		}).catch(function (err) {
-			// implementation of handleError has been omitted from this example
-			handleError(err);
-		});
-	}
-};
 
 // hypothetical back-end data
 const rawSegmentData = [
