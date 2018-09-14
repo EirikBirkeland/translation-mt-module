@@ -1,4 +1,4 @@
-
+import TranslationService from '../lib/fetcher';
 
 // hypothetical back-end data
 const rawSegmentData = [
@@ -42,7 +42,7 @@ class Segment {
 		this.target = target;
 		this.suggestion = null;
 		this.tags = tags;
-		this.fetcher = new Fetcher(this.id);
+		this.fetcher = new TranslationService(this.id);
 	}
 	updateSuggestion(cb) {
 		this.fetcher.submit(this.target, res => {
@@ -57,13 +57,11 @@ class Segment {
 
 const editorSegments = rawSegmentData.map(x => new Segment(x));
 
-document.addEventListener('segmentTranslationChanged', event => {
+document.addEventListener('segmentTranslationChanged', async (event) => {
 	const changedSegmentId = event.detail.segmentId;
 	const index = changedSegmentId - 1;
 
-	editorSegments[index].updateSuggestion(res => {
-		const { mtSuggestion } = res.data.mtSuggestion;
-
-		editorSegments[index].setSuggestion(mtSuggestion);
-	});
+	const res = await editorSegments[index].updateSuggestion();
+	const { mtSuggestion } = res.data.mtSuggestion;
+	editorSegments[index].setSuggestion(mtSuggestion);
 });
