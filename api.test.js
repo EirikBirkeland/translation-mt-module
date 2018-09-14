@@ -63,6 +63,6 @@ describe('a translation fetcher', () => {
             expect(res.status).toEqual(200);
             expect(res.data).toEqual('Jorden er flott!');
             done();
-        });g
+        });
     });
 });
