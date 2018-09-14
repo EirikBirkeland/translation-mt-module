@@ -1,0 +1,18 @@
+{
+  "name": "translation-mt-module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:EirikBirkeland/translation-mt-module.git",
+  "author": "Eirik Birkeland <birketrans@gmail.com>",
+  "license": "",
+  "private": true,
+  "devDependencies": {
+    "@babel/core": "^7.0.1",
+    "axios": "^0.18.0",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
+    "jest-mock-axios": "^2.1.11",
+    "regenerator-runtime": "^0.12.1"
+  }
+}
