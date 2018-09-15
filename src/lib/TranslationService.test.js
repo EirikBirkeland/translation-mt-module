@@ -1,5 +1,5 @@
 import mockAxios from 'axios';
-import TranslationService from './fetcher';
+import TranslationService from './TranslationService';
 
 describe('a translation fetcher', () => {
     it('should retrieve an initial translation from the server', async () => {

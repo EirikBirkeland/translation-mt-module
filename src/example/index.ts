@@ -6,18 +6,15 @@
 
 // TODO: How can I avoid defining stuff in RawSegmentData and in Segment twice?
 
-import TranslationService from '../lib/fetcher';
+import TranslationService from '../lib/TranslationService';
 
 interface Tag {
 	// a identifier that's unique within the context; may coincide with original order
 	readonly id: number;
-
 	// the actual tag contents, e.g. strong, span, div
 	content: string;
-
 	// the starting index for the tag in the text-only version of the translation unit
 	startIndex: number;
-
 	// the span/length of the tag. The closing position is determined by looking at startIndex and length.
 	// E.g. A length of 1 would indicate a 'collapsed' tag.
 	length: number;
@@ -26,22 +23,17 @@ interface Tag {
 interface RawSegmentData {
 	// a segment identifier
 	readonly id: number;
-
 	// the source text without tags
 	source: string;
-
 	// the target string without tags
 	target: string;
-
 	// tags
 	tags: Array<Tag>;
-
 	// original source
 	_sourceOriginal?: string;
 }
 
-// hypothetical back-end data
-const rawSegmentData:Array<RawSegmentData> = [
+const rawSegmentData: Array<RawSegmentData> = [
 	{
 		id: 1,
 		source: "Hello world",
@@ -85,18 +77,18 @@ class Segment {
 	target: string;
 
 	// the latest translation fetched from back-end
-	suggestion: null|string;
+	suggestion: null | string;
 
 	// metadata allowing for dynamic reconstruction of segment with tags
 	originalTags: Array<Tag>;
 
 	// the user's tag positioning in the editor will be reflected here
-	userDefinedTags: null|Array<Tag>;
-	
+	userDefinedTags: null | Array<Tag>;
+
 	// an injected translation service
 	fetcher: TranslationService;
 
-	constructor(rawSegmentData) {
+	constructor(rawSegmentData: RawSegmentData) {
 		const { source, target, tags, id } = rawSegmentData;
 		this.id = id;
 		this.source = source;
@@ -106,13 +98,13 @@ class Segment {
 		this.userDefinedTags = null;
 		this.fetcher = new TranslationService();
 	}
-	
+
 	updateSuggestion(cb?: Function) {
-		this.fetcher.submit(this.target, (res) => {
-			if(cb) { return cb(res) };
+		this.fetcher.submit(this.target, (res: any) => {
+			if (cb) { return cb(res) };
 		});
 	}
-	setSuggestion(newMtSuggestion) {
+	setSuggestion(newMtSuggestion: any) {
 		this.suggestion = newMtSuggestion;
 	}
 	/* Additional methods omitted... */
@@ -121,7 +113,7 @@ class Segment {
 const editorSegments = rawSegmentData.map(x => new Segment(x));
 
 // for the sake of this example, I have assumed that
-// the editor will issue a `segmentTranslationChanged` event
+// the editor will issue a `segmentTranslationChanged` event)
 document.addEventListener('segmentTranslationChanged', async (event: CustomEvent) => {
 	const changedSegmentId = event.detail.segmentId;
 	const index = changedSegmentId - 1;

@@ -39,8 +39,3 @@ export default class TranslationService {
         });
     }
 };
-
-const a = new TranslationService();
-a.submit({a: 1}, () => {
-    console.log("hi");
-})
