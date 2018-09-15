@@ -80,18 +80,20 @@ class Segment {
 	// the latest translation fetched from back-end
 	suggestion: null|string;
 	// metadata allowing for dynamic reconstruction of segment with tags
-	// TODO: I have not accounted for the user's tag positioning
-	tags: Array<Object>;
+	originalTags: Array<Tag>;
+	// the user's tag positioning in the editor will be reflected here
+	userDefinedTags: null|Array<Tag>;
 	// an injected translation service
 	fetcher: TranslationService;
 
 	constructor(rawSegmentData) {
-		const { source, target, tags, id, translationService } = rawSegmentData;
+		const { source, target, tags, id } = rawSegmentData;
 		this.id = id;
 		this.source = source;
 		this.target = target;
 		this.suggestion = null;
-		this.tags = tags;
+		this.originalTags = tags;
+		this.userDefinedTags = null;
 		this.fetcher = new TranslationService();
 	}
 	updateSuggestion(cb?: Function) {
