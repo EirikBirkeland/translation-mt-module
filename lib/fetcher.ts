@@ -20,7 +20,10 @@ const serverInstance = axios.create({
 // TODO: decide on name: TranslationService, TranslationProvider, TranslationProxy
 // TranslationFetcher, TranslationRetriever
 export default class TranslationService {
-    submit(payload, cb) {
+    
+    constructor(){}
+
+    submit (payload: Object, cb: Function) {
         return new Promise((resolve, reject) => {
             // make POST request to server's /translate end-point
             // and retrieve an updated machine translation
@@ -36,3 +39,8 @@ export default class TranslationService {
         });
     }
 };
+
+const a = new TranslationService();
+a.submit({a: 1}, () => {
+    console.log("hi");
+})
