@@ -26,12 +26,16 @@ interface Tag {
 interface RawSegmentData {
 	// a segment identifier
 	readonly id: number;
+
 	// the source text without tags
 	source: string;
+
 	// the target string without tags
 	target: string;
+
 	// tags
 	tags: Array<Tag>;
+
 	// original source
 	_sourceOriginal?: string;
 }
@@ -73,16 +77,22 @@ const rawSegmentData:Array<RawSegmentData> = [
 class Segment {
 	// a readonly unique identifier
 	readonly id: number;
+
 	// the source string without tags
 	source: string;
+
 	// the target string without tags
 	target: string;
+
 	// the latest translation fetched from back-end
 	suggestion: null|string;
+
 	// metadata allowing for dynamic reconstruction of segment with tags
 	originalTags: Array<Tag>;
+
 	// the user's tag positioning in the editor will be reflected here
 	userDefinedTags: null|Array<Tag>;
+	
 	// an injected translation service
 	fetcher: TranslationService;
 
@@ -96,6 +106,7 @@ class Segment {
 		this.userDefinedTags = null;
 		this.fetcher = new TranslationService();
 	}
+	
 	updateSuggestion(cb?: Function) {
 		this.fetcher.submit(this.target, (res) => {
 			if(cb) { return cb(res) };
