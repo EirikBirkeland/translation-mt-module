@@ -1,11 +1,3 @@
-//  General comments
-//
-//
-//
-//
-
-// TODO: How can I avoid defining stuff in RawSegmentData and in Segment twice?
-
 import TranslationService from '../lib/TranslationService';
 
 interface Tag {
